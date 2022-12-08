@@ -1,0 +1,45 @@
+session
+    .run("CREATE (movie:Movie{name:{name},releaseDate:{releaseDate}})  RETURN movie",{name:"MY MOVIE",releaseDate:"22-04-18"})
+      .then(function (result) {
+                console.log(result);
+       })
+       .catch(function (error) {
+                console.log(error);
+       });
+
+
+
+
+
+session
+        .run("MATCH (movie:Movie)  RETURN movie")
+            .then(function (result) {
+                console.log(result);               
+            })
+            .catch(function (error) {
+              console.log(error);
+   });
+
+
+
+
+
+ session
+     .run('MATCH (movie:Movie) where id(movie)={id} set movie.name={name} return movie', { id:121,name:"MOVIE-2" })
+        .then(function (result) {
+            console.log(result);
+          })
+         .catch(function (error) {
+            console.log(error);
+    });
+
+
+
+  session
+     .run('MATCH (movie:Movie) where id(movie)={id} detach delete movie', { id: 121 })
+        .then(function (result) {
+             console.log(result);
+         })
+        .catch(function (error) {
+         console.log(error);
+   });
