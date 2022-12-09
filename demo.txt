@@ -1,0 +1,38 @@
+create (Jack:Student{Name:"Jack",Sid:"st-1"})
+create (Lee:Student{Name:"Lee",Sid:"st-2"})
+create (Sam:Student{Name:"Sam",Sid:"st-3"})
+create (Rao:Student{Name:"Rao",Sid:"st-4"})
+create (Raj:Professor{Name:"Raj",Pid:"p-1"})
+create (Bredon:Professor{Name:"Bredon",Pid:"p-2"})
+create (Virat:Admin{Name:"Virat",Aid:"a-1",Role:"HOD"})
+create (Dubey:Admin{Name:"Dubey",Aid:"a-2",Role:"VC"})
+create (Cricket:Sports{Name:"Cricket"})
+create (Badminton:Sports{Name:"Badminton"})
+create (Chess:Sports{Name:"Chess"})
+create (Maths:Subject{Name:"Maths",Subid:"sub-1"})
+create (Dbms:Subject{Name:"Dbms",Subid:"sub-2"})
+
+match (prof:Professor),(sub:Subject) where prof.Name="Raj" and sub.Name="Maths" create (prof)-[r:takesub]->(sub)
+match (prof:Professor),(sub:Subject) where prof.Name="Bredon" and sub.Name="Dbms" create (prof)-[r:takesub]->(sub)
+
+match (std:Student),(sub:Subject) where std.Name="Sam" and sub.Name="Dbms" create (std)-[st:study]->(sub)
+match (std:Student),(sub:Subject) where std.Name="Sam" and sub.Name="Maths" create (std)-[st:study]->(sub)
+match (std:Student),(sub:Subject) where std.Name="Jack" and sub.Name="Dbms" create (std)-[st:study]->(sub)
+match (std:Student),(sub:Subject) where std.Name="Jack" and sub.Name="Maths" create (std)-[st:study]->(sub)
+match (std:Student),(sub:Subject) where std.Name="Rao" and sub.Name="Dbms" create (std)-[st:study]->(sub)
+match (std:Student),(sub:Subject) where std.Name="Rao" and sub.Name="Maths" create (std)-[st:study]->(sub)
+match (std:Student),(sub:Subject) where std.Name="Lee" and sub.Name="Dbms" create (std)-[st:study]->(sub)
+match (std:Student),(sub:Subject) where std.Name="Lee" and sub.Name="Maths" create (std)-[st:study]->(sub)
+
+
+match (std:Student),(sp:Sports) where std.Name="Lee" and sp.Name="Cricket" create (std)-[p:Play]->(sp)
+match (std:Student),(sp:Sports) where std.Name="Lee" and sp.Name="Chess" create (std)-[p:Play]->(sp)
+match (std:Student),(sp:Sports) where std.Name="Jack" and sp.Name="Badminton" create (std)-[p:Play]->(sp)
+match (std:Student),(sp:Sports) where std.Name="Sam" and sp.Name="Cricket" create (std)-[p:Play]->(sp)
+match (std:Student),(sp:Sports) where std.Name="Sam" and sp.Name="Badminton" create (std)-[p:Play]->(sp)
+match (std:Student),(sp:Sports) where std.Name="Rao" and sp.Name="Chess" create (std)-[p:Play]->(sp)
+
+match (ad:Admin),(prof:Professor) where ad.Name="Virat" and prof.Name="Raj" create (ad)-[h:handle]->(prof)
+match (ad:Admin),(prof:Professor) where ad.Name="Virat" and prof.Name="Bredon" create (ad)-[h:handle]->(prof)
+
+match (ad1:Admin),(ad2:Admin) where ad1.Name="Dubey" and ad2.Name="Virat" create (ad1)-[h:handle]->(ad2)
